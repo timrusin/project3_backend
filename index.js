@@ -39,6 +39,9 @@ app.use('/podcasts/', podcastController)
 const userController = require('./controllers/userController')
 app.use('/users/', userController)
 
+const playlistController = require('./controllers/playlistController')
+app.use('/playlists/', playlistController)
+
 /* END CONTROLLERS HERE */
 app.use((err, req, res, next) => {
   const statusCode = res.statusCode || 500
