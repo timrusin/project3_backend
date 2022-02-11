@@ -1,6 +1,6 @@
 const express = require('express')
-
 const router = express.Router()
+const { requireToken } = require('../middleware/auth')
 
 const Podcasts = require('../models/podcast')  
 
@@ -13,7 +13,8 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/:id', async (req, res, next)=>{
+
+router.get('/:id', requireToken, async (req, res, next)=>{
     try{
         const podcast = await Podcasts.findById(req.params.id)
         if(podcast){
@@ -26,7 +27,7 @@ router.get('/:id', async (req, res, next)=>{
     }
 })
 
-router.post('/', async (req, res, next)=>{
+router.post('/', requireToken, async (req, res, next)=>{
     try{
         const newPodcast = await Podcasts.create(req.body)
         res.status(201).json(newPodcast)
@@ -36,7 +37,7 @@ router.post('/', async (req, res, next)=>{
  
 })
 
-router.put('/:id', async (req, res, next)=>{
+router.put('/:id', requireToken, async (req, res, next)=>{
     try{
         const podcastToUpdate = await Podcasts.findByIdAndUpdate(
             req.params.id,
@@ -55,7 +56,7 @@ router.put('/:id', async (req, res, next)=>{
     }
 })
 
-router.delete('/:id', async (req, res, next)=>{
+router.delete('/:id', requireToken, async (req, res, next)=>{
     try{
         const podcastToDelete = await Podcasts.findByIdAndDelete(
             req.params.id)
