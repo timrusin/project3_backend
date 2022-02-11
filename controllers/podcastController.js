@@ -27,7 +27,7 @@ router.get('/:id', requireToken, async (req, res, next)=>{
     }
 })
 
-router.post('/', requireToken, async (req, res, next)=>{
+router.post('/', async (req, res, next)=>{
     try{
         const newPodcast = await Podcasts.create(req.body)
         res.status(201).json(newPodcast)
