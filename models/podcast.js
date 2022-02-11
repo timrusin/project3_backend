@@ -3,7 +3,7 @@ const mongoose = require('../db/connection')
 
 // we want a schema with a title and a url 
 const PodcastSchema = new mongoose.Schema({
-    title: String, // give it a name and a data type!
+    name: String, // give it a name and a data type!
     url: String,
     category: [String],
     image_url: String,
