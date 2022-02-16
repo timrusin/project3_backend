@@ -4,7 +4,11 @@
   "description": "ted Dev Rules lolol",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "build": "cd project3_frontend && npm run build",
+  "install-project3_frontend": "cd project3_frontend && npm install",
+  "heroku-postbuild": "npm run install-project3_frontend && npm run build",
+  "start": "node index.js"
   },
 
 
