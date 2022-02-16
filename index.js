@@ -31,7 +31,7 @@ app.use(requestLogger);
 // Redirect
 
 app.get('/', (req, res) => {
-  res.redirect('/signin')
+  res.redirect('/')
 })
 
 

@@ -13,11 +13,12 @@ const PodcastSchema = new mongoose.Schema({
     }],
     total_episodes: Number,
     publisher: String,
-    external_urls: Object
+    external_urls: Object,
+
 })
 
 const Podcasts = mongoose.model('Podcasts', PodcastSchema)
 
 // export it so other files can access it! 
 
-module.exports = Podcasts
+module.exports = { PodcastSchema, Podcasts }
