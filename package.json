@@ -11,14 +11,6 @@
   "start": "node index.js"
   },
 
-
-  "build": "cd project3_frontend && npm run build",
-  "install-project3_frontend": "cd project3_frontend && npm install",
-  "heroku-postbuild": "npm run install-project3_frontend && npm run build",
-  "start": "node index.js",
- 
-
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ReginaSherman/project3_backend.git"
