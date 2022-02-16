@@ -1,8 +1,6 @@
-// require that mongoose package! 
 const mongoose = require('../db/connection')
 const { PodcastSchema } = require('./podcast')
 
-// we want a schema with a title and a url 
 const UserSchema = new mongoose.Schema({
     username: String,
     email: String,
@@ -14,7 +12,5 @@ const UserSchema = new mongoose.Schema({
 })
 
 const Users = mongoose.model('Users', UserSchema)
-
-// export it so other files can access it! 
 
 module.exports = Users
