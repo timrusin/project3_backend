@@ -53,6 +53,12 @@ app.use(handleErrors);
 // START SERVER
 //=============================================================================
 
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static('project3_frontend/build')) //THIS IS FOR THE DEPLOY 4:30 MINUTE MARK
+} //WILL NEED TO INSTALL BUILD INTO THE FRONT END APP!!!!
+
+
+
 app.listen(app.get('port'), () => {
   console.log(`✅ PORT: ${app.get('port')} 🌟`)
 })
