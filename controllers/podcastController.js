@@ -36,24 +36,7 @@ router.post('/', requireToken, async (req, res, next)=>{
  
 })
 
-// // POST /reviews/
-// router.post('/', (req, res, next) => {
-// 	// get the review data from the body of the request
-// 	const podcastData = req.body;
-// 	// get the restaurant id from the body
-// 	const userId = podcastData.userId;
-// 	// find the restaurant by its id
-// 	User.findById(userId)
-// 		.then((user) => {
-// 			// add review to restaurant
-// 			user.podcasts.push(podcastData);
-// 			// save restaurant
-// 			return user.save();
-// 		})
-// 		// send responsne back to client
-// 		.then((user) => res.status(201).json({ user: user }))
-// 		.catch(next);
-// });
+
 
 router.put('/:id', requireToken, async (req, res, next)=>{
     try{
