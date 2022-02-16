@@ -12,7 +12,7 @@ const PodcastSchema = new mongoose.Schema({
     total_episodes: Number,
     publisher: String,
     external_urls: Object,
-
+})
 
 const Podcasts = mongoose.model('Podcasts', PodcastSchema)
 
