@@ -3,6 +3,7 @@ const Users = require('../models/user')
 const bcrypt = require('bcrypt')
 const { createUserToken } = require('../middleware/auth')
 const router = express.Router()
+const User = require('../models/user')  
 
 
 router.get('/', async (req, res, next) => {
@@ -14,18 +15,39 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/:id', async (req, res, next)=>{
-    try{
-        const user = await Users.findById(req.params.id)
-        if(user){
-            res.json(user)
-        }else {
+router.get('/:id/favorites', async (req, res, next)=>{
+    const userId = req.params.id
+    try {
+        const favorites = await Users.findById(userId).populate('favorites')
+        
+        if (favorites) {
+            res.json(favorites)
+        } else {
             res.sendStatus(404)
         }
     }catch(err){
         next(err)
     }
 })
+
+// POST /reviews/
+router.post('/', (req, res, next) => {
+	// get the review data from the body of the request
+	const podcastData = req.body;
+	// get the restaurant id from the body
+	const userId = podcastData.userId;
+	// find the restaurant by its id
+	User.findById(userId)
+		.then((user) => {
+			// add review to restaurant
+			user.podcasts.push(podcastData);
+			// save restaurant
+			return user.save();
+		})
+		// send responsne back to client
+		.then((user) => res.status(201).json({ user: user }))
+		.catch(next);
+});
 
 
 // Using async/await
@@ -57,7 +79,22 @@ router.post('/signin', (req, res, next) => {
       .then((token) => res.json({ token }))
       .catch(next);
   });
-
+ 
+  router.post('/signin', async (req, res, next) => {
+    try {
+        const foundUser = await Users.findOne({ email: req.body.email })
+        const token = await createUserToken(req, foundUser)
+        // Check work
+        console.log(foundUser)
+        console.log(token)
+        res.json({
+            user: foundUser,
+            generatedToken: token
+        })
+    } catch (err) {
+        next(err)
+    }
+})
 
 router.put('/:id', async (req, res, next)=>{
     try{
